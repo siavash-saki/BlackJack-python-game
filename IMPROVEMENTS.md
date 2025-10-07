@@ -1,8 +1,5 @@
 # Suggested Improvements
 
-0. **Test**
-   - Create tests.
-
 1. **Modularize Game Logic**
    - Extract card, deck, and game loop logic from `blackJack.py` into dedicated modules (e.g., `cards.py`, `deck.py`, `game.py`) to simplify navigation and facilitate unit testing.
    - Convert the ASCII-art rendering helpers into a reusable view module so that future interfaces (such as a web UI) can share the core mechanics without duplicating code.
