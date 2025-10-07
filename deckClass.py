@@ -9,20 +9,17 @@ card_deck=new_deck()
 
 def pick_a_card():
 
+    while True:
 
-	while True:
-	    
-		
+        if card_deck==[]:
+            card_deck=new_deck()
 
-	    if card_deck==[]:
-	        card_deck=new_deck()
-	        
-	    else:
-	        card_suit, card_num = choice(card_deck)
-	        card_deck.remove((card_suit, card_num))
-	        break
+        else:
+            card_suit, card_num = choice(card_deck)
+            card_deck.remove((card_suit, card_num))
+            break
 
-	return (card_suit,card_num)
+    return (card_suit,card_num)
 
 
 
@@ -53,7 +50,7 @@ def card_suit_image(card_suit):
     elif card_suit=='diamond':
         return b'\xe2\x99\xa6'.decode("utf-8", "ignore")
 
-def card_image():
+def card_image(card_num, card_suit):
 
     num_image=card_num_image(card_num)
     suit_image=card_suit_image(card_suit)
