@@ -235,8 +235,14 @@ while player_money>0:
         
         player_score=score(player)
         
-        if player_score==21:
-            print(f'\nBLACKJACK! You just won {bet}$!')
+        if player_score==21 and len(player)==2:
+            blackjack_winnings = int(bet * 1.5)
+            print(f'\nBLACKJACK! You just won {blackjack_winnings}$!')
+            player_money += blackjack_winnings
+            break
+
+        elif player_score==21:
+            print(f'\n21! You just won {bet}$!')
             player_money += bet
             break
         
