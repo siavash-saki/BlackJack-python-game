@@ -2,7 +2,7 @@ from random import shuffle, choice, randrange
 
 def new_deck():
     
-    return [(x,y) for x in ['heart','sapde','club','diamond'] for y in range(1,14)]
+    return [(x,y) for x in ['heart','spade','club','diamond'] for y in range(1,14)]
 
 card_deck=new_deck()
 
