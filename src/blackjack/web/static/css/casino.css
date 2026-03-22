@@ -1,0 +1,90 @@
+/* Card deal animation — slides in from left */
+@keyframes card-deal {
+    from {
+        opacity: 0;
+        transform: translateX(-60px) rotate(-8deg) scale(0.8);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0) rotate(0) scale(1);
+    }
+}
+
+.card-deal {
+    animation: card-deal 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+/* Stagger cards */
+.card-deal:nth-child(1) { animation-delay: 0s; }
+.card-deal:nth-child(2) { animation-delay: 0.1s; }
+.card-deal:nth-child(3) { animation-delay: 0.2s; }
+.card-deal:nth-child(4) { animation-delay: 0.3s; }
+.card-deal:nth-child(5) { animation-delay: 0.4s; }
+.card-deal:nth-child(6) { animation-delay: 0.5s; }
+.card-deal:nth-child(7) { animation-delay: 0.6s; }
+
+/* Fade in for messages */
+@keyframes fade-in {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-in {
+    animation: fade-in 0.5s ease-out both;
+}
+
+/* Slow pulse for "Deal Again" button */
+@keyframes pulse-slow {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(212, 160, 23, 0.4); }
+    50% { box-shadow: 0 0 20px 4px rgba(212, 160, 23, 0.2); }
+}
+
+.animate-pulse-slow {
+    animation: pulse-slow 2s ease-in-out infinite;
+}
+
+/* Card hover lift */
+.playing-card {
+    transition: transform 0.2s ease;
+}
+
+.playing-card:hover {
+    transform: translateY(-4px);
+}
+
+/* Chip button press effect */
+.chip-btn:active {
+    transform: scale(0.95) !important;
+}
+
+/* Felt texture overlay */
+body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+        radial-gradient(circle at 20% 50%, rgba(0,100,0,0.1) 0%, transparent 50%),
+        radial-gradient(circle at 80% 50%, rgba(0,100,0,0.1) 0%, transparent 50%),
+        radial-gradient(circle at 50% 20%, rgba(0,80,0,0.08) 0%, transparent 50%);
+    pointer-events: none;
+    z-index: 0;
+}
+
+body > * {
+    position: relative;
+    z-index: 1;
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+    width: 4px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(255,255,255,0.1);
+    border-radius: 2px;
+}

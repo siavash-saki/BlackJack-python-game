@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BlackJack</title>
+    <script src="https://unpkg.com/htmx.org@2.0.4"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/casino.css') }}">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        felt: '#0d5016',
+                        'felt-dark': '#0a3d11',
+                        'felt-light': '#157a25',
+                        gold: '#d4a017',
+                        'gold-light': '#f0c040',
+                    },
+                    fontFamily: {
+                        game: ['"Segoe UI"', 'system-ui', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/howler@2.2.4/dist/howler.min.js"></script>
+    <script>
+        // Sound effects (optional, graceful fallback)
+        let sounds = {};
+        try {
+            sounds.deal = new Howl({ src: ['{{ url_for("static", filename="sfx/card_deal.mp3") }}'], volume: 0.4 });
+            sounds.chip = new Howl({ src: ['{{ url_for("static", filename="sfx/chip_bet.mp3") }}'], volume: 0.5 });
+            sounds.win = new Howl({ src: ['{{ url_for("static", filename="sfx/win.mp3") }}'], volume: 0.5 });
+        } catch(e) {}
+
+        // Play sounds on HTMX events
+        document.addEventListener('htmx:afterSettle', function(e) {
+            const table = document.getElementById('game-table');
+            if (!table) return;
+            const phase = table.dataset.phase;
+            const outcome = table.dataset.outcome || '';
+            try {
+                if (phase === 'player_turn' || phase === 'dealer_turn') {
+                    sounds.deal && sounds.deal.play();
+                } else if (phase === 'round_over' && ['blackjack','win','dealer_bust'].includes(outcome)) {
+                    sounds.win && sounds.win.play();
+                }
+            } catch(e) {}
+        });
+    </script>
+</head>
+<body class="bg-felt-dark min-h-screen font-game text-white">
+    <header class="bg-black/30 border-b border-gold/30 px-6 py-3 flex items-center justify-between">
+        <h1 class="text-2xl font-bold tracking-wider text-gold">
+            <span class="text-red-500">&hearts;</span> BLACK JACK <span>&spades;</span>
+        </h1>
+        <div class="text-sm text-gray-400">Play against the dealer</div>
+    </header>
+
+    <main class="max-w-5xl mx-auto px-4 py-6">
+        <div id="game-table" data-phase="{{ game.phase }}" data-outcome="{{ game.result.outcome if game.result else '' }}">
+            {% include "partials/table.html" %}
+        </div>
+    </main>
+
+    <footer class="fixed bottom-0 w-full bg-black/40 border-t border-gold/20 py-2 text-center text-xs text-gray-500">
+        BlackJack &mdash; Built with Flask + HTMX
+    </footer>
+</body>
+</html>

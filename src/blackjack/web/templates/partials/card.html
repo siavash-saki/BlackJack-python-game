@@ -1,0 +1,21 @@
+{# Renders a single playing card. `card` comes from the loop variable. #}
+{% if card.get('hidden') %}
+<div class="playing-card card-deal bg-gradient-to-br from-blue-800 to-blue-950 border-2 border-blue-600
+            w-20 h-28 rounded-lg shadow-lg flex items-center justify-center">
+    <div class="text-blue-400 text-3xl opacity-40">?</div>
+</div>
+{% else %}
+<div class="playing-card card-deal w-20 h-28 rounded-lg shadow-lg border
+            {% if card.is_red %}bg-white border-gray-200 text-red-600{% else %}bg-white border-gray-200 text-gray-900{% endif %}
+            flex flex-col justify-between p-1.5 select-none">
+    <div class="flex justify-between items-start">
+        <span class="text-sm font-bold leading-none">{{ card.display }}</span>
+        <span class="text-xs leading-none">{{ card.symbol }}</span>
+    </div>
+    <div class="text-3xl text-center leading-none my-auto">{{ card.symbol }}</div>
+    <div class="flex justify-between items-end rotate-180">
+        <span class="text-sm font-bold leading-none">{{ card.display }}</span>
+        <span class="text-xs leading-none">{{ card.symbol }}</span>
+    </div>
+</div>
+{% endif %}

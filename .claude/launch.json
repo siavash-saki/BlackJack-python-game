@@ -1,0 +1,12 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "blackjack",
+      "runtimeExecutable": "python3",
+      "runtimeArgs": ["-m", "blackjack"],
+      "port": 5000,
+      "autoPort": true
+    }
+  ]
+}

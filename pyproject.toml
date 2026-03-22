@@ -1,0 +1,24 @@
+[project]
+name = "blackjack"
+version = "1.0.0"
+description = "A browser-based BlackJack game with Flask + HTMX"
+requires-python = ">=3.9"
+dependencies = [
+    "flask>=3.1.0",
+]
+
+[project.scripts]
+blackjack = "blackjack.__main__:main"
+
+[project.optional-dependencies]
+dev = ["pytest"]
+
+[build-system]
+requires = ["setuptools>=68.0"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
